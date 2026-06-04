@@ -1,4 +1,30 @@
+<<<<<<< HEAD
 *~
 *.swp
 tarballs/
 .stack-work/
+=======
+dist
+dist-*
+cabal-dev
+*.o
+*.hi
+*.hie
+*.chi
+*.chs.h
+*.dyn_o
+*.dyn_hi
+.hpc
+.hsenv
+.cabal-sandbox/
+cabal.sandbox.config
+*.prof
+*.aux
+*.hp
+*.eventlog
+.stack-work/
+cabal.project.local
+cabal.project.local~
+.HTF/
+.ghc.environment.*
+>>>>>>> 3091fca458d4534f7cf587969ec3b369314f2310

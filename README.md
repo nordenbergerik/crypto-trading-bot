@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # crypto-trading-bot
 
 ## Execute
@@ -8,3 +9,6 @@
 ## Run tests
 
 `stack test`
+=======
+# crypto-trading-bot
+>>>>>>> 3091fca458d4534f7cf587969ec3b369314f2310
