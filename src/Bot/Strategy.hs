@@ -1,15 +1,14 @@
 module Bot.Strategy (movingAverage, makeDecision) where
 
+import Bot.Types (NumOfBTCInWallet, Decision(..), BTCPrice (BTCPrice), Balance(Balance))
 import Data.Sequence (Seq)
-import Bot.Types (NumOfBTCInWallet, Decision(..))
+import qualified Data.Sequence as Seq
 
+movingAverage :: Seq BTCPrice -> BTCPrice
+movingAverage priceList = (sum priceList) / (fromIntegral $ Seq.length priceList) 
 
-movingAverage :: Seq Double -> Double
-movingAverage priseList = (sum priseList) / (fromIntegral $ length priseList) 
-
-makeDecision :: Double -> Double -> Double -> NumOfBTCInWallet -> Decision
-makeDecision marketPrice sma balance btcInWallet =
-    case () of _
-                | marketPrice > sma && balance - marketPrice > 0 -> Buy
-                | marketPrice < sma && btcInWallet > 0           -> Sell
-                | otherwise                                      -> Hold
+makeDecision :: BTCPrice -> BTCPrice -> Balance -> NumOfBTCInWallet -> Decision
+makeDecision (BTCPrice price) (BTCPrice sma) (Balance balance) btcInWallet 
+    | price > sma && balance >= price = Buy
+    | price < sma && btcInWallet > 0  = Sell
+    | otherwise                       = Hold

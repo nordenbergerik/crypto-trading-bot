@@ -1,15 +1,15 @@
 module Bot.Accounting(updateBalance, updateWallet, roi) where
 
-import Bot.Types(Balance, BTCPrice, Decision, NumOfBTCInWallet, Decision(..))
+import Bot.Types(Balance(..), BTCPrice (BTCPrice), Decision, NumOfBTCInWallet, Decision(..))
 
 
 
 updateBalance :: Balance -> BTCPrice -> Decision -> Balance
-updateBalance oldBalance price decision = 
+updateBalance (Balance oldBalance) (BTCPrice price) decision = 
     case decision of
-        Buy  -> oldBalance - price
-        Sell -> oldBalance + price
-        Hold -> oldBalance
+        Buy  -> Balance (oldBalance - price)
+        Sell -> Balance (oldBalance + price)
+        Hold -> Balance oldBalance
 
 updateWallet :: NumOfBTCInWallet -> Decision -> NumOfBTCInWallet
 updateWallet n decision =
@@ -20,5 +20,6 @@ updateWallet n decision =
         
 
 roi :: Balance -> NumOfBTCInWallet -> BTCPrice -> Balance -> Double
-roi balance numOFBTCInWallet price initialBalance = let walletValue = balance + (fromIntegral numOFBTCInWallet * price) 
-                                     in walletValue / initialBalance
+roi (Balance balance) numOFBTCInWallet (BTCPrice price) (Balance initialBalance) = 
+    let walletValue = balance + (fromIntegral numOFBTCInWallet * price) 
+    in realToFrac (walletValue / initialBalance)

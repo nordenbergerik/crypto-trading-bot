@@ -2,16 +2,16 @@ module Bot.Engine (runBot) where
 
 import Control.Concurrent.Async (async, wait)
 import Control.Concurrent.STM (TQueue, newTQueueIO, atomically, readTQueue)
--- import Data.Sequence ()
+
 import qualified Data.Sequence as Seq
 import Bot.API (streamMarketData)
-import Bot.Types (Balance, TradeTick (p), NumOfBTCInWallet, BTCPrice)
+import Bot.Types (Balance(Balance), TradeTick (p), NumOfBTCInWallet, BTCPrice(BTCPrice))
 import Bot.Strategy (movingAverage, makeDecision)
 import Data.Sequence
 import Bot.Accounting (updateBalance, updateWallet, roi)
 
 initialBalance :: Balance
-initialBalance = 1000000
+initialBalance = 1000000.00000000
 
 smaPeriod :: Int 
 smaPeriod = 20
@@ -31,12 +31,12 @@ engineLoop :: Balance -> NumOfBTCInWallet -> TQueue TradeTick -> Seq BTCPrice ->
 engineLoop balance numBTCInWallet queue history = do
     tick <- atomically $ readTQueue queue
     
-    let price = read (p tick) :: BTCPrice
+    let price = BTCPrice (read (p tick)) 
     let updatedHistory = history |> price
 
-    let trimmedHistory = if (Data.Sequence.length updatedHistory) > smaPeriod then 
-                            Data.Sequence.drop 1 updatedHistory else
-                                updatedHistory
+    let trimmedHistory = if (Seq.length updatedHistory) > smaPeriod 
+                        then Seq.drop 1 updatedHistory 
+                        else updatedHistory
 
     let sma = movingAverage trimmedHistory
 
