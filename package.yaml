@@ -28,6 +28,7 @@ dependencies:
 - async             # Concurrency utilities
 - text
 - stm               # Software Transactional Memory
+- containers        # Data.Sequence and other collections
 
 ghc-options:
 - -Wall

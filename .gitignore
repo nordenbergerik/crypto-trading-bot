@@ -1,9 +1,7 @@
-<<<<<<< HEAD
 *~
 *.swp
 tarballs/
 .stack-work/
-=======
 dist
 dist-*
 cabal-dev
@@ -27,4 +25,3 @@ cabal.project.local
 cabal.project.local~
 .HTF/
 .ghc.environment.*
->>>>>>> 3091fca458d4534f7cf587969ec3b369314f2310

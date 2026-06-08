@@ -26,6 +26,7 @@ source-repository head
 library
   exposed-modules:
       Bot
+      Bot.Accounting
       Bot.API
       Bot.Engine
       Bot.Strategy
@@ -41,6 +42,7 @@ library
       aeson
     , async
     , base >=4.11 && <10
+    , containers
     , rio >=0.1.12.0
     , stm
     , text
@@ -61,6 +63,7 @@ executable crypto-trading-bot-exe
       aeson
     , async
     , base >=4.11 && <10
+    , containers
     , crypto-trading-bot
     , optparse-simple
     , rio >=0.1.12.0
@@ -85,6 +88,7 @@ test-suite crypto-trading-bot-test
       aeson
     , async
     , base >=4.11 && <10
+    , containers
     , crypto-trading-bot
     , hspec
     , rio >=0.1.12.0
