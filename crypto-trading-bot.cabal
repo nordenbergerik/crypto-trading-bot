@@ -28,7 +28,10 @@ library
       Bot
       Bot.Accounting
       Bot.API
+      Bot.Backtest
+      Bot.BacktestEngine
       Bot.Engine
+      Bot.ROI
       Bot.Strategy
       Bot.Types
   other-modules:
@@ -43,6 +46,7 @@ library
     , async
     , base >=4.11 && <10
     , containers
+    , retry
     , rio >=0.1.12.0
     , stm
     , text
@@ -66,6 +70,7 @@ executable crypto-trading-bot-exe
     , containers
     , crypto-trading-bot
     , optparse-simple
+    , retry
     , rio >=0.1.12.0
     , stm
     , text
@@ -91,6 +96,7 @@ test-suite crypto-trading-bot-test
     , containers
     , crypto-trading-bot
     , hspec
+    , retry
     , rio >=0.1.12.0
     , stm
     , text

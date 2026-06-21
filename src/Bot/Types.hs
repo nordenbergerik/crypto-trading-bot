@@ -2,7 +2,7 @@
 -- {-# LANGUAGE InstanceSigs #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 
-module Bot.Types (TradeTick(..), Balance(..), NumOfBTCInWallet, BTCPrice(..), Decision(..)) where
+module Bot.Types (TradeTick(..), BacktestTradeTick(..), Balance(..), NumOfBTCInWallet, BTCPrice(..), Decision(..), BTCHistoricDayData) where
 
 import GHC.Generics (Generic)
 import Data.Aeson (FromJSON)
@@ -19,7 +19,7 @@ newtype Balance = Balance CryptoFixed
   deriving (Show, Eq, Ord, Num, Real, Fractional)
 
 newtype BTCPrice = BTCPrice CryptoFixed
-  deriving (Show, Read, Eq, Ord, Num, Real, Fractional)
+  deriving (Show, Eq, Ord, Num, Real, Fractional, Read)
 
 type NumOfBTCInWallet = Int
 
@@ -28,8 +28,26 @@ data TradeTick = TradeTick
   , p :: !String  -- Price (Binance sends this as a string)
   } deriving (Show, Generic)
 
+data BacktestTradeTick = BacktestTradeTick
+  { btSymbol :: !Text
+  , btPrice :: !BTCPrice
+  , btDate :: !Text
+  } deriving (Show, Generic)
+
 instance FromJSON TradeTick
 
 data Decision = Buy | Sell | Hold
   deriving (Show)
 
+data BTCHistoricDayData = HistoryData 
+  {unix :: String
+  , date :: String
+  , symbol :: String
+  , open :: BTCPrice
+  , high :: BTCPrice
+  , low :: BTCPrice
+  , close :: BTCPrice
+  , volumeBTC :: Double 
+  , volumeUSDT :: Double
+  , tradecount :: Int
+  } deriving (Show)

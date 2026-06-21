@@ -1,0 +1,4 @@
+{
+  "haskell.manageHLS": "PATH",
+  "haskell.serverExecutablePath": "/home/kirre/.ghcup/bin/haskell-language-server-wrapper"
+}

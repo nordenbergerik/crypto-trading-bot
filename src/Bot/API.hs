@@ -14,7 +14,7 @@ streamMarketData queue = do
     let host = "stream.binance.com"
         port = 9443
         path = "/ws/btcusdt@trade"
-
+    
     putStrLn "Connecting to Binance..."
     runSecureClient host port path $ \connection -> do
         putStrLn "Connected!"

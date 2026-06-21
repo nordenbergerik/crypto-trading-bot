@@ -4,10 +4,11 @@ import Control.Concurrent.Async (async, wait)
 import Control.Concurrent.STM (TQueue, newTQueueIO, atomically, readTQueue)
 
 import qualified Data.Sequence as Seq
+import Data.Sequence
 import Bot.API (streamMarketData)
 import Bot.Types (Balance(Balance), TradeTick (p), NumOfBTCInWallet, BTCPrice(BTCPrice))
 import Bot.Strategy (movingAverage, makeDecision)
-import Data.Sequence
+
 import Bot.Accounting (updateBalance, updateWallet, roi)
 
 initialBalance :: Balance
@@ -25,7 +26,6 @@ runBot = do
     engineLoop initialBalance 0 sharedQueue initialHistory
 
     wait apiThread
-
 
 engineLoop :: Balance -> NumOfBTCInWallet -> TQueue TradeTick -> Seq BTCPrice -> IO ()
 engineLoop balance numBTCInWallet queue history = do

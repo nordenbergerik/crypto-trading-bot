@@ -29,6 +29,7 @@ dependencies:
 - text
 - stm               # Software Transactional Memory
 - containers        # Data.Sequence and other collections
+- retry
 
 ghc-options:
 - -Wall
