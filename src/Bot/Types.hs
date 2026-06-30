@@ -16,7 +16,7 @@ instance HasResolution E8 where
 type CryptoFixed = Fixed E8
 
 newtype Balance = Balance CryptoFixed
-  deriving (Show, Eq, Ord, Num, Real, Fractional)
+  deriving (Show, Eq, Ord, Num, Real, Fractional, Read)
 
 newtype BTCPrice = BTCPrice CryptoFixed
   deriving (Show, Eq, Ord, Num, Real, Fractional, Read)

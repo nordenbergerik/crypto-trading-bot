@@ -82,6 +82,7 @@ test-suite crypto-trading-bot-test
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
+      ROISpec
       UtilSpec
       Paths_crypto_trading_bot
   autogen-modules:

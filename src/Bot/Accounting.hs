@@ -17,6 +17,10 @@ updateWallet n decision =
         Hold -> n
 
 roi :: Balance -> NumOfBTCInWallet -> BTCPrice -> Balance -> Double
-roi (Balance balance) numOFBTCInWallet (BTCPrice price) (Balance initialBalance) = 
-    let walletValue = balance + (fromIntegral numOFBTCInWallet * price) 
-    in realToFrac (walletValue / initialBalance)
+roi (Balance balance) numOfBTCInWallet (BTCPrice price) (Balance initialBalance) =
+    if initialBalance == 0
+        then -1 
+        else
+            let walletValue = balance + (realToFrac numOfBTCInWallet * price)
+                roiRatio = (walletValue - initialBalance) / initialBalance
+            in realToFrac (roiRatio * 100)
